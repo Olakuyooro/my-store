@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Simple E-commerce App
 
-Currently, two official plugins are available:
+Welcome to my simple e-commerce app! This application is built using React and fetches product data from the FakeStore API. It demonstrates the core functionalities of an e-commerce platform, including product listing, product details, and a shopping cart.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Usage](#usage)
+- [Link](#link)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## About the Project
 
-- Configure the top-level `parserOptions` property like this:
+This e-commerce app is designed to showcase my skills in frontend development using React. The app displays products from the FakeStore API, allowing users to browse items, view detailed information, and add products to their cart.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Features
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **Product Listing:** Displays a list of products fetched from the FakeStore API.
+- **Product Details:** View detailed information about each product.
+- **Shopping Cart:** Add and remove products from the shopping cart.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
+
+## Technologies Used
+
+- **Frontend:** React, Tailwind CSS, HTML
+- **State Management:** React Hooks
+- **Data Fetching:** Axios
+- **API:** [FakeStore API](https://fakestoreapi.com/)
+- **Build Tool:** Vite
+
+
+## Usage
+
+- **Browse Products:** On the homepage, you can see a list of products fetched from the FakeStore API.
+- **View Product Details:** Click on any product to view more details.
+- **Add to Cart:** Use the "Add to Cart" button to add items to your shopping cart.
+- **View Cart:** Click on the cart icon to view items in your cart and proceed to checkout.
+
+## Link
+
+- https://my-store-kappa-liard.vercel.app/
+
+
+Thank you for checking out my simple e-commerce app!
