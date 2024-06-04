@@ -1,4 +1,4 @@
-import { FaUser } from "react-icons/fa";
+// import { FaUser } from "react-icons/fa";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { RootState } from "../../state/store";
@@ -45,7 +45,7 @@ const Header = () => {
         </section>
 
         <div className="pt-4 flex space-x-6">
-          <FaUser />
+          {/* <FaUser /> */}
           <div>
             <FaCartShopping
               className=" relative cursor-pointer "
