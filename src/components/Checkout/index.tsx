@@ -31,15 +31,15 @@ const CheckOut = () => {
           <div className="" key={index}>
             <div className="">
               <p className="text-xs">{item.title}</p>
-              <p className="text-red-400 text-xs">
-                ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+              <p className="text-red-400 text-xs my-3">
+              ₦{(parseFloat(item.price) * item.quantity).toFixed(2)}
               </p>
               <img className="w-8" src={item.image} alt={item.title} />
             </div>
           </div>
         ))}
       </div>
-      <p className="text-green-400 my-6">Total sum: {totalSum.toFixed(2)}</p>
+      <p className="text-green-400 my-6">Total sum: ₦{totalSum.toFixed(2)}</p>
       <PaystackButton
         amount={totalSum}
         email={"pabloalabanza9@gmail.com"}

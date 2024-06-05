@@ -1,14 +1,16 @@
 // import { FaUser } from "react-icons/fa";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { RootState } from "../../state/store";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../state/store";
+import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import { useState } from "react";
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdOutlineDelete } from "react-icons/md";
+import { removeItem } from "../../state/cart/cartSlice";
 
 const Header = () => {
   const cart = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch<AppDispatch>();
   const [cartState, setCartState] = useState(false);
   const totalSum = cart.reduce((total, item) => {
     return total + parseFloat(item.price) * item.quantity;
@@ -60,18 +62,21 @@ const Header = () => {
              bg-gray-100 rounded-md shadow-lg"
               >
                 {cart.map((item, index) => (
-                  <div className="w-24" key={index}>
-                    <p className="text-xs">
-                      {item.title} x {item.quantity}
-                    </p>
+                  <div className="" key={index}>
+                    <div className="flex justify-between">
+                      <p className="text-xs w-24">
+                        {item.title} x {item.quantity}
+                      </p>
+                      <MdOutlineDelete onClick={()=> dispatch(removeItem(item.id))} />
+                    </div>
                     <p className="text-red-400 text-sm mt-2">
-                      ${parseFloat(item.price) * item.quantity}
+                    ₦{parseFloat(item.price) * item.quantity}
                     </p>
                     <img className="w-4" src={item.image} alt={item.title} />
                   </div>
                 ))}
                 <p className="text-green-400 text-sm mt-2">
-                  Total sum: {totalSum.toFixed(2)}
+                  Total sum: ₦{totalSum.toFixed(2)}
                 </p>
                 <Link
                   to="/checkout"
