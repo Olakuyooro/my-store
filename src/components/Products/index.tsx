@@ -59,7 +59,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ type }) => {
 
   return (
     <Layout>
-      <div className="grid grid-cols-5 gap-6 p-7">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-6 p-7">
         {/* <div>
           {cart.map((item, index) => (
             <div key={index}>
@@ -71,7 +71,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ type }) => {
         </div> */}
         {filteredProducts.map((product) => (
           <div
-            className="w-56 border p-2 cursor-pointer hover:translate-x-1 hover:translate-y-1 hover:ease-in hover:delay-75"
+            className="border p-2 cursor-pointer hover:translate-x-1 hover:translate-y-1 hover:ease-in hover:delay-75"
             key={product.id}
           >
             <div className="flex flex-col justify-center items-center">
