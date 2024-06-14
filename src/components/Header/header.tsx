@@ -4,18 +4,19 @@ import { AppDispatch, RootState } from "../../state/store";
 import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import { useState } from "react";
-import { MdMenu, MdOutlineDelete } from "react-icons/md";
+import { MdMenu} from "react-icons/md";
 import { removeItem } from "../../state/cart/cartSlice";
-import { IoMdClose } from "react-icons/io";
+import { MobileMenu } from "./mobileMenu";
+import { CartDropdown } from "./cartDropdown";
+
 
 const Header = () => {
   const cart = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch<AppDispatch>();
   const [cartState, setCartState] = useState(false);
-  const totalSum = cart.reduce((total, item) => {
-    return total + parseFloat(item.price) * item.quantity;
-  }, 0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const totalSum = cart.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
 
   const handleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,114 +29,41 @@ const Header = () => {
           <div className="md:w-32 mt-4 ml-6 flex relative">
             <div onClick={handleMenu}>
               {!isMenuOpen && <MdMenu className="md:hidden text-lg mr-4" />}
-              {isMenuOpen && (
-                <div
-                  className="fixed inset-0 bg-black bg-opacity-50 z-10"
-                  onClick={handleMenu}
-                ></div>
-              )}
-              <div
-                className={`bg-white shadow-2xl w-44 h-screen p-2 absolute top-[-2rem] left-[-1.5rem] transition-transform duration-300 ease-in-out z-20 ${
-                  isMenuOpen ? "translate-x-0" : "-translate-x-full"
-                }`}
-              >
-                <IoMdClose
-                  className="text-lg cursor-pointer mb-4"
-                  onClick={handleMenu}
-                />
-               <section className="flex flex-col space-y-3">
-               <Link
-              className="text-GrayishBlue opacity-70  hover:text-VeryDarkBlue hover:opacity-100"
-              to="/"
-            >
-              Collection
-            </Link>
-            <Link
-              className="text-GrayishBlue opacity-70 hover:text-VeryDarkBlue hover:opacity-100"
-              to="/categories/men"
-            >
-              Men
-            </Link>
-            <Link
-              className="text-GrayishBlue opacity-70  hover:text-VeryDarkBlue hover:opacity-100"
-              to="/categories/women"
-            >
-              Women
-            </Link>
-               </section>
-
-              </div>
             </div>
-
-            <img src={logo} alt=""></img>
+            <MobileMenu isOpen={isMenuOpen} onToggle={handleMenu} />
+            <img src={logo} alt="Company Logo" />
           </div>
-
-          <ul className="hidden md:block space-x-5 text-sm mt-4 font-semibold">
-            <Link
-              className="text-GrayishBlue opacity-70  hover:text-VeryDarkBlue hover:opacity-100"
-              to="/"
-            >
-              Collection
-            </Link>
-            <Link
-              className="text-GrayishBlue opacity-70 hover:text-VeryDarkBlue hover:opacity-100"
-              to="/categories/men"
-            >
-              Men
-            </Link>
-            <Link
-              className="text-GrayishBlue opacity-70  hover:text-VeryDarkBlue hover:opacity-100"
-              to="/categories/women"
-            >
-              Women
-            </Link>
+          <ul className="hidden md:flex space-x-5 text-sm mt-4 font-semibold">
+            <li>
+              <Link to="/" className="text-GrayishBlue opacity-70 hover:text-VeryDarkBlue hover:opacity-100">
+                Collection
+              </Link>
+            </li>
+            <li>
+              <Link to="/categories/men" className="text-GrayishBlue opacity-70 hover:text-VeryDarkBlue hover:opacity-100">
+                Men
+              </Link>
+            </li>
+            <li>
+              <Link to="/categories/women" className="text-GrayishBlue opacity-70 hover:text-VeryDarkBlue hover:opacity-100">
+                Women
+              </Link>
+            </li>
           </ul>
         </section>
 
         <div className="pt-4 flex space-x-6">
-          {/* <FaUser /> */}
           <div>
-            <FaCartShopping
-              className="relative cursor-pointer"
-              onClick={() => setCartState(!cartState)}
-            />
+            <FaCartShopping className="relative cursor-pointer" onClick={() => setCartState(!cartState)} />
             <p className="absolute top-5 right-9 flex justify-center items-center bg-black text-white w-4 h-4 text-[0.5rem] text-center rounded-full p-1">
               {cart.length}
             </p>
-            {cartState && (
-              <div className="w-64 p-4 absolute z-10 top-10 right-12 bg-gray-100 rounded-md shadow-lg">
-                {cart.map((item, index) => (
-                  <div className="" key={index}>
-                    <div className="flex justify-between">
-                      <p className="text-xs w-24">
-                        {item.title} x {item.quantity}
-                      </p>
-                      <MdOutlineDelete
-                        onClick={() => dispatch(removeItem(item.id))}
-                      />
-                    </div>
-                    <p className="text-red-400 text-sm mt-2">
-                      ₦{parseFloat(item.price) * item.quantity}
-                    </p>
-                    <img className="w-4" src={item.image} alt={item.title} />
-                  </div>
-                ))}
-                <p className="text-green-400 text-sm mt-2">
-                  Total sum: ₦{totalSum.toFixed(2)}
-                </p>
-                <Link
-                  to="/checkout"
-                  className="bg-black text-xs text-white p-1 rounded-md mt-4"
-                >
-                  Checkout
-                </Link>
-              </div>
-            )}
+            {cartState && <CartDropdown cart={cart} totalSum={totalSum} onRemove={(id:number) => dispatch(removeItem(id))} />}
           </div>
         </div>
       </div>
       <div className="flex justify-center items-center ">
-        <hr className="hidden md:flex w-[90%] mt-8 "></hr>
+        <hr className="hidden md:flex w-[90%] mt-8" />
       </div>
     </div>
   );
